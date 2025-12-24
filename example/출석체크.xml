@@ -1,0 +1,622 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="KOR*+c(j!`TIJ@7Qy.Is">오늘순위문자열</variable>
+    <variable id="irZ!4umA5l=Dv7zcC0Ds">오늘날짜</variable>
+    <variable id="[O)NKQYs/x^az2PE61:A">출석</variable>
+    <variable id="r*sJ+eQaDKBIZZ)}0}0D">오늘순위</variable>
+    <variable id="D+:+okGcyYt|fhQo,dB[">i</variable>
+  </variables>
+  <block type="kakao_bot_init" id="yv:,[,;_!q,ZU$|-1npx" x="-930" y="390">
+    <statement name="HANDLERS">
+      <block type="kakao_set_prefix" id="QR2i]d~2*A=c.}uwE.FI">
+        <field name="PREFIX">!</field>
+        <next>
+          <block type="variables_set" id="T]i@~kN-;Ut)9,[39;(3">
+            <field name="VAR" id="[O)NKQYs/x^az2PE61:A">출석</field>
+            <value name="VALUE">
+              <block type="kakao_object_create_empty" id="2(1{1g*~?)(dXuT~*DeJ"></block>
+            </value>
+            <next>
+              <block type="variables_set" id="wR2z~!uFzIoBDgel9y6N">
+                <field name="VAR" id="irZ!4umA5l=Dv7zcC0Ds">오늘날짜</field>
+                <value name="VALUE">
+                  <block type="kakao_date_format" id="9u~-[)Q3X1Gtgs7T+VLk">
+                    <field name="FORMAT">YYYY-MM-DD</field>
+                    <value name="DATE">
+                      <block type="kakao_date_now" id="@{aRI1.UGo[r-_u0+P=h"></block>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <block type="variables_set" id="rMHxHUUz9:8$iT_04:*`">
+                    <field name="VAR" id="r*sJ+eQaDKBIZZ)}0}0D">오늘순위</field>
+                    <value name="VALUE">
+                      <block type="lists_create_empty" id=";v`je/uT(}CHw)R4y0jE"></block>
+                    </value>
+                    <next>
+                      <block type="controls_if" id="CuW0q!UJ~?/$FZm.H2E.">
+                        <value name="IF0">
+                          <block type="kakao_file_exists" id="FZq+:pyLwC_}L=,ak(~v">
+                            <value name="PATH">
+                              <block type="text" id="J@Lr,,n?sJ_+n$Y~h%D;">
+                                <field name="TEXT">sdcard/출석.json</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <statement name="DO0">
+                          <block type="variables_set" id="31(k*POv,^+GfuX|u(0W">
+                            <field name="VAR" id="[O)NKQYs/x^az2PE61:A">출석</field>
+                            <value name="VALUE">
+                              <block type="kakao_json_parse" id="pkC@.5%~%Yrh_%MP[6xu">
+                                <value name="JSON">
+                                  <block type="kakao_file_read" id="EFOz].%~v_+r!,^S`[uM">
+                                    <value name="PATH">
+                                      <block type="text" id="(-a{1@$+b+f4Rst9lbBi">
+                                        <field name="TEXT">sdcard/출석.json</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                          </block>
+                        </statement>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="kakao_on_command" id="FJ(+n`w///KD*g^NSV:S" x="-10" y="410">
+    <field name="COMMAND">출석</field>
+    <statement name="DO">
+      <block type="controls_if" id="P*z^Ynl3=rpsE~}C#F]c">
+        <value name="IF0">
+          <block type="logic_compare" id="U4`8}`O~rU!;is;eTY~9">
+            <field name="OP">NEQ</field>
+            <value name="A">
+              <block type="variables_get" id=",5avtD#~`{V5T5yX~1g2">
+                <field name="VAR" id="irZ!4umA5l=Dv7zcC0Ds">오늘날짜</field>
+              </block>
+            </value>
+            <value name="B">
+              <block type="kakao_date_format" id="XYifk^.03E+[QL/z{70=">
+                <field name="FORMAT">YYYY-MM-DD</field>
+                <value name="DATE">
+                  <block type="kakao_date_now" id="Z8Qy`1sEm2~dRw]Zpr@}"></block>
+                </value>
+              </block>
+            </value>
+          </block>
+        </value>
+        <statement name="DO0">
+          <block type="variables_set" id="{PBq}XmjfqBo5;gLuix:">
+            <field name="VAR" id="irZ!4umA5l=Dv7zcC0Ds">오늘날짜</field>
+            <value name="VALUE">
+              <block type="kakao_date_format" id="5$9gBXcBptY=m$z?0j2a">
+                <field name="FORMAT">YYYY-MM-DD</field>
+                <value name="DATE">
+                  <block type="kakao_date_now" id=")+M-+AF!w4-bZ_q~,TnJ"></block>
+                </value>
+              </block>
+            </value>
+            <next>
+              <block type="variables_set" id="ww5qEX`?jSV^wxq_,vD^">
+                <field name="VAR" id="r*sJ+eQaDKBIZZ)}0}0D">오늘순위</field>
+                <value name="VALUE">
+                  <block type="lists_create_empty" id="4p@dIoQ=s:N|cD{z~(uT"></block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </statement>
+        <next>
+          <block type="controls_ifelse" id="sb)GjB;l*dB*8{c:PWOj">
+            <value name="IF0">
+              <block type="logic_compare" id="MdUO~$^0bp#[jkJ36MK$">
+                <field name="OP">EQ</field>
+                <value name="A">
+                  <block type="kakao_object_has_key" id="X%JURv+z@MADF9:GC$5i">
+                    <value name="OBJECT">
+                      <block type="variables_get" id="_Q,TvwB1#qsV^QTxJ!Vf">
+                        <field name="VAR" id="[O)NKQYs/x^az2PE61:A">출석</field>
+                      </block>
+                    </value>
+                    <value name="KEY">
+                      <block type="kakao_msg_sender" id=",Dkp@ATE-y6fzQ~i7.Dr"></block>
+                    </value>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="logic_boolean" id="(fnr`GU}6*T6;B?{cmXu">
+                    <field name="BOOL">TRUE</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <statement name="DO0">
+              <block type="controls_ifelse" id="^Jefo!a)=^^6qP_=06|w">
+                <value name="IF0">
+                  <block type="logic_compare" id="8.0pDF3qiofe~vok7Q[s">
+                    <field name="OP">EQ</field>
+                    <value name="A">
+                      <block type="kakao_object_has_key" id="dwZ,iom-:9$N+W@^b=N!">
+                        <value name="OBJECT">
+                          <block type="kakao_object_get" id="9Hq.kQ]d]9Do|yl;1*W:">
+                            <value name="OBJECT">
+                              <block type="variables_get" id="HHi{fQRW@9f~cfsvMNuW">
+                                <field name="VAR" id="[O)NKQYs/x^az2PE61:A">출석</field>
+                              </block>
+                            </value>
+                            <value name="KEY">
+                              <block type="kakao_msg_sender" id="M*quwci$muRNd3.66Evz"></block>
+                            </value>
+                          </block>
+                        </value>
+                        <value name="KEY">
+                          <block type="variables_get" id="4/5D,}Wl_C7Qwqz?N`AZ">
+                            <field name="VAR" id="irZ!4umA5l=Dv7zcC0Ds">오늘날짜</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="logic_boolean" id="){@BZV}+mJBA~hXYC[i0">
+                        <field name="BOOL">TRUE</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <statement name="DO0">
+                  <block type="kakao_reply" id="H$i!vuXx-6N2S.h8kziN">
+                    <value name="MESSAGE">
+                      <block type="text_join" id="[|jHR(jU;H4$RmZHeYQ.">
+                        <mutation items="2"></mutation>
+                        <value name="ADD0">
+                          <block type="kakao_msg_sender" id=".PD6%k,v0Tt;jjIk7U?c"></block>
+                        </value>
+                        <value name="ADD1">
+                          <block type="text" id="Lt;B_zypJ2E#;X+=^Qiu">
+                            <field name="TEXT">님, 이미 출석하셨습니다.</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                  </block>
+                </statement>
+                <statement name="ELSE">
+                  <block type="kakao_object_set" id="kigF^Oc(D%9-4g@Mu)Xl">
+                    <value name="OBJECT">
+                      <block type="kakao_object_get" id=")kV6}^@QK;iT/soOhNNW">
+                        <value name="OBJECT">
+                          <block type="variables_get" id="~dYx2Q?^Q!O/IG/PF5km">
+                            <field name="VAR" id="[O)NKQYs/x^az2PE61:A">출석</field>
+                          </block>
+                        </value>
+                        <value name="KEY">
+                          <block type="kakao_msg_sender" id="qaq*qW$Tk2Gt=H0Z*8Az"></block>
+                        </value>
+                      </block>
+                    </value>
+                    <value name="KEY">
+                      <block type="variables_get" id="-R749u^)mI}6**}lqG=c">
+                        <field name="VAR" id="irZ!4umA5l=Dv7zcC0Ds">오늘날짜</field>
+                      </block>
+                    </value>
+                    <value name="VALUE">
+                      <block type="math_number" id="AWn:djbBw_LcpesQdek9">
+                        <field name="NUM">1</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="lists_setIndex" id="CKZ|8bJBbfg7;]Bqvn.?">
+                        <mutation at="false"></mutation>
+                        <field name="MODE">INSERT</field>
+                        <field name="WHERE">LAST</field>
+                        <value name="LIST">
+                          <block type="variables_get" id="$2{(_]9aqaLt-*i4[V1_">
+                            <field name="VAR" id="r*sJ+eQaDKBIZZ)}0}0D">오늘순위</field>
+                          </block>
+                        </value>
+                        <value name="TO">
+                          <block type="kakao_msg_sender" id="pCli,X:1pdZ^L*;oMbZ3"></block>
+                        </value>
+                        <next>
+                          <block type="kakao_reply" id="0c1%zp$`.gXPz8.4i35-">
+                            <value name="MESSAGE">
+                              <block type="text_join" id="gj_@jk`ZBjzw+73o=,wL">
+                                <mutation items="10"></mutation>
+                                <value name="ADD0">
+                                  <block type="kakao_msg_sender" id="Zmu7T@Wk9_tykqBk6A^q"></block>
+                                </value>
+                                <value name="ADD1">
+                                  <block type="text" id="`JW$Io$Gb0oJ`1H]h(:]">
+                                    <field name="TEXT">님 출석 완료!</field>
+                                  </block>
+                                </value>
+                                <value name="ADD2">
+                                  <block type="kakao_char_newline" id="6BL^t[[FA%yVdJ:(%Gr3"></block>
+                                </value>
+                                <value name="ADD3">
+                                  <block type="text" id="3X2zm0GXhJN{t3NZT6lT">
+                                    <field name="TEXT">오늘의 순위: </field>
+                                  </block>
+                                </value>
+                                <value name="ADD4">
+                                  <block type="lists_length" id="^8,7cO2E)hx#4#fhfk]F">
+                                    <value name="VALUE">
+                                      <block type="variables_get" id="{K-46DQA)QPP)0-22^6p">
+                                        <field name="VAR" id="r*sJ+eQaDKBIZZ)}0}0D">오늘순위</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <value name="ADD5">
+                                  <block type="text" id="Ko3N+Y1;.gmOQo#jBL6^">
+                                    <field name="TEXT">등</field>
+                                  </block>
+                                </value>
+                                <value name="ADD6">
+                                  <block type="kakao_char_newline" id="Aam00ZclPkwJFzE0KeP0"></block>
+                                </value>
+                                <value name="ADD7">
+                                  <block type="text" id="F/71^TnNWx(B7$ZZI9(3">
+                                    <field name="TEXT">총 </field>
+                                  </block>
+                                </value>
+                                <value name="ADD8">
+                                  <block type="lists_length" id="^fMEQabC3CrtL.9`,J/u">
+                                    <value name="VALUE">
+                                      <block type="kakao_object_keys" id="%)WG9Xi(W]Yk*O#)|1O=">
+                                        <value name="OBJECT">
+                                          <block type="kakao_object_get" id="??p4g|ww26qW?x;+.CR3">
+                                            <value name="OBJECT">
+                                              <block type="variables_get" id="2S,vS.@8P)W4$MWXnirL">
+                                                <field name="VAR" id="[O)NKQYs/x^az2PE61:A">출석</field>
+                                              </block>
+                                            </value>
+                                            <value name="KEY">
+                                              <block type="kakao_msg_sender" id="8p6~7BfY%k}oWGta4p.i"></block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <value name="ADD9">
+                                  <block type="text" id="Y,cf~.wC}!;I%hQF4(*m">
+                                    <field name="TEXT">일 동안 출석했습니다.</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+              </block>
+            </statement>
+            <statement name="ELSE">
+              <block type="kakao_object_set" id="^Z^-qTe/_HOAd5ZbjNx;">
+                <value name="OBJECT">
+                  <block type="variables_get" id=",AGtu*#:BJcAEYcc2[WC">
+                    <field name="VAR" id="[O)NKQYs/x^az2PE61:A">출석</field>
+                  </block>
+                </value>
+                <value name="KEY">
+                  <block type="kakao_msg_sender" id="Xs1,y~AI[Xu=CmI|WW0)"></block>
+                </value>
+                <value name="VALUE">
+                  <block type="kakao_object_create_empty" id=",5?lV;O|o6*.6DL_x+y+"></block>
+                </value>
+                <next>
+                  <block type="kakao_object_set" id="qp18)Jh9~,`Jv~fR7im(">
+                    <value name="OBJECT">
+                      <block type="kakao_object_get" id=":HOsih{_$XOEO;9*n;LO">
+                        <value name="OBJECT">
+                          <block type="variables_get" id=".3W-I,rspZ%7])zhmr{F">
+                            <field name="VAR" id="[O)NKQYs/x^az2PE61:A">출석</field>
+                          </block>
+                        </value>
+                        <value name="KEY">
+                          <block type="kakao_msg_sender" id="X@kfog-u#@NC)mVgq2TD"></block>
+                        </value>
+                      </block>
+                    </value>
+                    <value name="KEY">
+                      <block type="variables_get" id="QbZ?s,jd]%$~!Fs:*-q+">
+                        <field name="VAR" id="irZ!4umA5l=Dv7zcC0Ds">오늘날짜</field>
+                      </block>
+                    </value>
+                    <value name="VALUE">
+                      <block type="math_number" id="MWSnXR6fb~nXr/N0~Lg)">
+                        <field name="NUM">1</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="lists_setIndex" id="Dn7r#N0U@f%}j}kuEA2E">
+                        <mutation at="false"></mutation>
+                        <field name="MODE">INSERT</field>
+                        <field name="WHERE">LAST</field>
+                        <value name="LIST">
+                          <block type="variables_get" id="UBM-)M7F4xu@9[0pb)q!">
+                            <field name="VAR" id="r*sJ+eQaDKBIZZ)}0}0D">오늘순위</field>
+                          </block>
+                        </value>
+                        <value name="TO">
+                          <block type="kakao_msg_sender" id="Wb+M%Fj(j2PjG%ruA7ak"></block>
+                        </value>
+                        <next>
+                          <block type="kakao_reply" id="_S~mM4n8f;XvIc~*Znpi">
+                            <value name="MESSAGE">
+                              <block type="text_join" id="y*ABSvt!9B*h[sYeQ$.:">
+                                <mutation items="10"></mutation>
+                                <value name="ADD0">
+                                  <block type="kakao_msg_sender" id="(,(@(+%k6CEyK(eoR#gm"></block>
+                                </value>
+                                <value name="ADD1">
+                                  <block type="text" id="B],Q_#ozo^SOPZ-Z4;Fg">
+                                    <field name="TEXT">님 출석 완료!</field>
+                                  </block>
+                                </value>
+                                <value name="ADD2">
+                                  <block type="kakao_char_newline" id="*;9%8,9`=}AleG$u$$6c"></block>
+                                </value>
+                                <value name="ADD3">
+                                  <block type="text" id="|kVj0:)Vzyx/9v15,yzm">
+                                    <field name="TEXT">오늘의 순위: </field>
+                                  </block>
+                                </value>
+                                <value name="ADD4">
+                                  <block type="lists_length" id="n~vFIJ2qPWfnk~//=JA-">
+                                    <value name="VALUE">
+                                      <block type="variables_get" id="m}IVK`g(N,Hzg%%}mamB">
+                                        <field name="VAR" id="r*sJ+eQaDKBIZZ)}0}0D">오늘순위</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <value name="ADD5">
+                                  <block type="text" id="_W6aqR(3-f.xZn1pUClB">
+                                    <field name="TEXT">등</field>
+                                  </block>
+                                </value>
+                                <value name="ADD6">
+                                  <block type="kakao_char_newline" id="$m5$V)^SRy:u420v7N[T"></block>
+                                </value>
+                                <value name="ADD7">
+                                  <block type="text" id="$LN4aY`d=BAUw@vefw=T">
+                                    <field name="TEXT">총 </field>
+                                  </block>
+                                </value>
+                                <value name="ADD8">
+                                  <block type="lists_length" id="=urM~WI/K0Lc.t]M^Ao5">
+                                    <value name="VALUE">
+                                      <block type="kakao_object_keys" id="pot2eg.tg1,I?!V5LTz@">
+                                        <value name="OBJECT">
+                                          <block type="kakao_object_get" id="k$`lP[::Je;y`6j[FCOK">
+                                            <value name="OBJECT">
+                                              <block type="variables_get" id="Oq^DXQD^7.97q1?VAYMz">
+                                                <field name="VAR" id="[O)NKQYs/x^az2PE61:A">출석</field>
+                                              </block>
+                                            </value>
+                                            <value name="KEY">
+                                              <block type="kakao_msg_sender" id="M}:[RR@@uhgTM1qYq}t-"></block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <value name="ADD9">
+                                  <block type="text" id="=71]=ptl77c6GrSO$bWi">
+                                    <field name="TEXT">일 동안 출석했습니다.</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <next>
+              <block type="kakao_file_write" id="U!v*SKLu#rnPNK00oDY:">
+                <value name="PATH">
+                  <block type="text" id="c`L-RsM)^2}.Hi!Td,r,">
+                    <field name="TEXT">sdcard/출석.json</field>
+                  </block>
+                </value>
+                <value name="DATA">
+                  <block type="kakao_json_stringify" id="$p]vbQ^AG]A0%(*0rAnO">
+                    <value name="OBJECT">
+                      <block type="variables_get" id="]B`~F^Z^!twGYk7~ZtYE">
+                        <field name="VAR" id="[O)NKQYs/x^az2PE61:A">출석</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="kakao_on_command" id="R6%Z4[6HKLFezh9Im[cA" x="-930" y="710">
+    <field name="COMMAND">출석순위</field>
+    <statement name="DO">
+      <block type="variables_set" id="Do|9db:d|i!#cRwSlL!f">
+        <field name="VAR" id="KOR*+c(j!`TIJ@7Qy.Is">오늘순위문자열</field>
+        <value name="VALUE">
+          <block type="text" id="qGX`]2S%w~_cHd7XgC`z">
+            <field name="TEXT"></field>
+          </block>
+        </value>
+        <next>
+          <block type="controls_if" id="4OIA2IU_).DvtLzc;eyg">
+            <mutation else="1"></mutation>
+            <value name="IF0">
+              <block type="logic_compare" id="=|b|XbLb#zA532)/n1[`">
+                <field name="OP">EQ</field>
+                <value name="A">
+                  <block type="lists_length" id="gp!Y16TaQ0V,Z-8YWn~U">
+                    <value name="VALUE">
+                      <block type="variables_get" id="}bOv;kuRyjM],f+.!zLW">
+                        <field name="VAR" id="r*sJ+eQaDKBIZZ)}0}0D">오늘순위</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="math_number" id="zwdD=a{#Hx;t;,TU^aoa">
+                    <field name="NUM">0</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <statement name="DO0">
+              <block type="kakao_reply_text" id="n7^TVm+fg_-Rq|^%`%AJ">
+                <field name="TEXT">아직 출석한 사람이 없습니다.</field>
+              </block>
+            </statement>
+            <statement name="ELSE">
+              <block type="controls_for" id="P-r~,VrkK]gz87KDbpH`">
+                <field name="VAR" id="D+:+okGcyYt|fhQo,dB[">i</field>
+                <value name="FROM">
+                  <block type="math_number" id="(e1Euw~=rJM=Vb)7P$;j">
+                    <field name="NUM">1</field>
+                  </block>
+                </value>
+                <value name="TO">
+                  <block type="lists_length" id="g.;,Gr:YM1i/5]@bS5^b">
+                    <value name="VALUE">
+                      <block type="variables_get" id="-[Il1oxetJ,~[_Tvh3u3">
+                        <field name="VAR" id="r*sJ+eQaDKBIZZ)}0}0D">오늘순위</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <value name="BY">
+                  <block type="math_number" id="VeRdcximo~XCwJBSj_~0">
+                    <field name="NUM">1</field>
+                  </block>
+                </value>
+                <statement name="DO">
+                  <block type="variables_set" id="]B|WDs/guOjQisNvh#vA">
+                    <field name="VAR" id="KOR*+c(j!`TIJ@7Qy.Is">오늘순위문자열</field>
+                    <value name="VALUE">
+                      <block type="text_join" id="Y#c}]+((G*qryCRf{*@p">
+                        <mutation items="5"></mutation>
+                        <value name="ADD0">
+                          <block type="variables_get" id="hJoAPyq7jyrn)c3:xTdM">
+                            <field name="VAR" id="KOR*+c(j!`TIJ@7Qy.Is">오늘순위문자열</field>
+                          </block>
+                        </value>
+                        <value name="ADD1">
+                          <block type="kakao_char_newline" id="%*+7Fmd5kEnE1`sGNOzn"></block>
+                        </value>
+                        <value name="ADD2">
+                          <block type="variables_get" id="oA_Yp:,`qWyLcu+~L$SO">
+                            <field name="VAR" id="D+:+okGcyYt|fhQo,dB[">i</field>
+                          </block>
+                        </value>
+                        <value name="ADD3">
+                          <block type="text" id="=k|Bk}_:sF*;tOcQ(Le[">
+                            <field name="TEXT">등: </field>
+                          </block>
+                        </value>
+                        <value name="ADD4">
+                          <block type="lists_getIndex" id="_TdI,eMv9z]nd+kn%-!j">
+                            <mutation statement="false" at="true"></mutation>
+                            <field name="MODE">GET</field>
+                            <field name="WHERE">FROM_START</field>
+                            <value name="VALUE">
+                              <block type="variables_get" id="d]C,Q9rWq[7!kz4#`|G=">
+                                <field name="VAR" id="r*sJ+eQaDKBIZZ)}0}0D">오늘순위</field>
+                              </block>
+                            </value>
+                            <value name="AT">
+                              <block type="variables_get" id="1X8E,=geen)Z-O:+ZlCb">
+                                <field name="VAR" id="D+:+okGcyYt|fhQo,dB[">i</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                  </block>
+                </statement>
+                <next>
+                  <block type="kakao_reply" id="PaC/0ZR*q:5r~RJ/CM[T">
+                    <value name="MESSAGE">
+                      <block type="text_join" id="yL:+U3TM[{VC_xFN[@p,">
+                        <mutation items="9"></mutation>
+                        <value name="ADD0">
+                          <block type="variables_get" id="P8{d+Q_yfy-~E88f7OK6">
+                            <field name="VAR" id="irZ!4umA5l=Dv7zcC0Ds">오늘날짜</field>
+                          </block>
+                        </value>
+                        <value name="ADD1">
+                          <block type="text" id="_!4`Pw?B2h35f]Av7h,p">
+                            <field name="TEXT">출석 순위</field>
+                          </block>
+                        </value>
+                        <value name="ADD2">
+                          <block type="kakao_char_newline" id="pGH~Q1UnX0H{JKg1oS(8"></block>
+                        </value>
+                        <value name="ADD3">
+                          <block type="text" id="@d9dcI[OL}$k[NF+Q+*=">
+                            <field name="TEXT">오늘 출석한 사람: </field>
+                          </block>
+                        </value>
+                        <value name="ADD4">
+                          <block type="lists_length" id="qf?~#$i,YIY_[1m$+f}n">
+                            <value name="VALUE">
+                              <block type="variables_get" id="@2N]81KUsY^ch4wEpdwy">
+                                <field name="VAR" id="r*sJ+eQaDKBIZZ)}0}0D">오늘순위</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <value name="ADD5">
+                          <block type="text" id="_[KDxpT:s%i?7r(xR@ox">
+                            <field name="TEXT">명</field>
+                          </block>
+                        </value>
+                        <value name="ADD6">
+                          <block type="kakao_char_newline" id="7CL%nz6ZC7,EnRA65TG{"></block>
+                        </value>
+                        <value name="ADD7">
+                          <block type="kakao_char_more" id="!Psdxh4]AWX?uxiv=XZ2"></block>
+                        </value>
+                        <value name="ADD8">
+                          <block type="variables_get" id="]{-(iwX76yx]Wi%{~DIw">
+                            <field name="VAR" id="KOR*+c(j!`TIJ@7Qy.Is">오늘순위문자열</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </statement>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>

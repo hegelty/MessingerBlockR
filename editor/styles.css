@@ -35,6 +35,44 @@ header h1 {
 header p {
     opacity: 0.9;
     font-size: 1rem;
+    margin-bottom: 12px;
+}
+
+.header-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+}
+
+.header-link {
+    color: white;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    transition: all 0.2s ease;
+    font-size: 0.9rem;
+    backdrop-filter: blur(10px);
+}
+
+.header-link:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.header-link svg {
+    vertical-align: middle;
+}
+
+.separator {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.9rem;
 }
 
 .main-content {
@@ -265,6 +303,19 @@ header p {
     .btn {
         padding: 8px 14px;
         font-size: 13px;
+    }
+
+    .header-links {
+        font-size: 0.8rem;
+    }
+
+    .header-link {
+        padding: 4px 8px;
+        font-size: 0.8rem;
+    }
+
+    .separator {
+        display: none;
     }
 }
 
