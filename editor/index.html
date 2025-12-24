@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>카카오톡 봇 블록 코딩 에디터</title>
+    <script src="https://unpkg.com/blockly/blockly.min.js"></script>
+    <script src="https://unpkg.com/blockly/msg/ko.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🤖 카카오톡 봇 블록 코딩 에디터</h1>
+            <p>블록을 조합하여 카카오톡 봇 코드를 만들어보세요!</p>
+        </header>
+
+        <div class="main-content">
+            <div class="editor-section">
+                <div class="toolbar">
+                    <button id="generateBtn" class="btn btn-primary">📝 코드 생성</button>
+                    <button id="copyBtn" class="btn btn-secondary">📋 코드 복사</button>
+                    <button id="clearBtn" class="btn btn-danger">🗑️ 초기화</button>
+                    <button id="saveBtn" class="btn btn-success">💾 저장</button>
+                    <button id="loadBtn" class="btn btn-info">📂 불러오기</button>
+                </div>
+                <div id="blocklyDiv"></div>
+            </div>
+
+            <div class="code-section" id="codeSection">
+                <div class="code-header">
+                    <h3>생성된 코드</h3>
+                    <div class="code-header-right">
+                        <span class="api-badge">API2</span>
+                        <button id="toggleCodeBtn" class="btn-toggle" title="코드 접기/펼치기">▼</button>
+                    </div>
+                </div>
+                <pre id="codeOutput"><code>// 블록을 조합하면 여기에 코드가 생성됩니다.</code></pre>
+            </div>
+        </div>
+    </div>
+
+    <!-- Blockly 툴박스 정의 -->
+    <xml id="toolbox" style="display: none">
+        <category name="🎯 이벤트" colour="#E6A23C">
+            <block type="kakao_on_message"></block>
+            <block type="kakao_on_command"></block>
+            <block type="kakao_on_start"></block>
+            <block type="kakao_on_compile"></block>
+        </category>
+        <category name="📨 메시지" colour="#5C81A6">
+            <block type="kakao_reply"></block>
+            <block type="kakao_reply_text"></block>
+            <block type="kakao_bot_send"></block>
+            <block type="kakao_can_reply"></block>
+            <block type="kakao_msg_info"></block>
+            <block type="kakao_msg_content"></block>
+            <block type="kakao_msg_room"></block>
+            <block type="kakao_msg_sender"></block>
+            <block type="kakao_msg_is_group"></block>
+            <block type="kakao_msg_channel_id"></block>
+        </category>
+        <category name="🤖 봇 설정" colour="#5CA65C">
+            <block type="kakao_bot_init"></block>
+            <block type="kakao_set_prefix"></block>
+        </category>
+        <category name="📁 파일" colour="#A65C5C">
+            <block type="kakao_file_read"></block>
+            <block type="kakao_file_write"></block>
+            <block type="kakao_file_append"></block>
+            <block type="kakao_file_exists"></block>
+            <block type="kakao_file_remove"></block>
+            <block type="kakao_file_mkdir"></block>
+            <block type="kakao_file_bot_path"></block>
+        </category>
+        <category name="📝 로그" colour="#A6745C">
+            <block type="kakao_log_info"></block>
+            <block type="kakao_log_error"></block>
+            <block type="kakao_log_debug"></block>
+        </category>
+        <category name="🔧 조건" colour="#5C68A6">
+            <block type="controls_if"></block>
+            <block type="controls_ifelse"></block>
+            <block type="logic_compare"></block>
+            <block type="logic_operation"></block>
+            <block type="logic_negate"></block>
+            <block type="logic_boolean"></block>
+        </category>
+        <category name="🔁 반복" colour="#5CA68D">
+            <block type="controls_repeat_ext"></block>
+            <block type="controls_whileUntil"></block>
+            <block type="controls_for"></block>
+            <block type="controls_forEach"></block>
+            <block type="controls_flow_statements"></block>
+        </category>
+        <category name="🔢 숫자" colour="#5C9FA6">
+            <block type="math_number"></block>
+            <block type="math_arithmetic"></block>
+            <block type="math_single"></block>
+            <block type="math_random_int"></block>
+            <block type="math_modulo"></block>
+        </category>
+        <category name="✏️ 텍스트" colour="#5CA668">
+            <block type="text"></block>
+            <block type="text_join"></block>
+            <block type="kakao_text_concat"></block>
+            <block type="kakao_text_split_get"></block>
+            <block type="kakao_text_includes"></block>
+            <block type="kakao_text_startswith"></block>
+            <block type="kakao_text_endswith"></block>
+            <block type="kakao_text_replace"></block>
+            <block type="kakao_char_newline"></block>
+            <block type="kakao_char_more"></block>
+            <block type="kakao_char_tab"></block>
+            <block type="text_length"></block>
+            <block type="text_indexOf"></block>
+            <block type="text_charAt"></block>
+            <block type="text_changeCase"></block>
+            <block type="text_trim"></block>
+        </category>
+        <category name="📦 리스트" colour="#745CA6">
+            <block type="lists_create_empty"></block>
+            <block type="lists_create_with"></block>
+            <block type="lists_length"></block>
+            <block type="lists_isEmpty"></block>
+            <block type="kakao_list_contains"></block>
+            <block type="lists_indexOf"></block>
+            <block type="lists_getIndex"></block>
+            <block type="lists_setIndex"></block>
+        </category>
+        <category name="🗃️ 오브젝트" colour="#5CA6A6">
+            <block type="kakao_object_create_empty"></block>
+            <block type="kakao_object_create"></block>
+            <block type="kakao_object_get"></block>
+            <block type="kakao_object_set"></block>
+            <block type="kakao_object_has_key"></block>
+            <block type="kakao_object_keys"></block>
+            <block type="kakao_object_values"></block>
+            <block type="kakao_object_delete"></block>
+            <block type="kakao_json_parse"></block>
+            <block type="kakao_json_stringify"></block>
+        </category>
+        <category name="🕐 날짜/시간" colour="#A6745C">
+            <block type="kakao_date_now"></block>
+            <block type="kakao_date_timestamp"></block>
+            <block type="kakao_date_current_year"></block>
+            <block type="kakao_date_current_month"></block>
+            <block type="kakao_date_current_day"></block>
+            <block type="kakao_date_current_hours"></block>
+            <block type="kakao_date_current_minutes"></block>
+            <block type="kakao_date_current_seconds"></block>
+            <block type="kakao_date_current_weekday"></block>
+            <block type="kakao_date_get"></block>
+            <block type="kakao_date_format"></block>
+            <block type="kakao_date_create"></block>
+            <block type="kakao_date_compare"></block>
+        </category>
+        <category name="📊 변수" colour="#A65C81" custom="VARIABLE"></category>
+        <category name="🔧 함수" colour="#9A5CA6" custom="PROCEDURE"></category>
+    </xml>
+
+    <script src="blocks.js"></script>
+    <script src="generators.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
+
